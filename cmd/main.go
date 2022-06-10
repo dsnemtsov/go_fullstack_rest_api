@@ -3,11 +3,16 @@ package main
 import (
 	todo "go_fullstack_crud"
 	"go_fullstack_crud/pkg/handler"
+	"go_fullstack_crud/pkg/repository"
+	"go_fullstack_crud/pkg/service"
 	"log"
 )
 
 func main() {
-	handlers := new(handler.Handler)
+	repos := repository.NewRepository()
+	services := service.NewService(repos)
+	handlers := handler.NewHandler(services)
+
 	srv := new(todo.Server)
 
 	if err := srv.Run("8080", handlers.InitRoutes()); err != nil {
