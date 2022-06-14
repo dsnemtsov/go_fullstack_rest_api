@@ -15,8 +15,9 @@ type Service struct {
 	Authorization
 	TodoList
 	TodoItem
+	repos *repository.Repository
 }
 
 func NewService(repos *repository.Repository) *Service {
-	return &Service{}
+	return &Service{repos: repos}
 }
